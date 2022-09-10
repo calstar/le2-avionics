@@ -1,5 +1,7 @@
 # LE2 Avionics 
 
-## [Ground DAQ Spec](https://docs.google.com/document/d/13VDrlMz54n0tT20tYANPPuO85ihRtZlENfx5LBO277A/edit#)  
+Hardware for LE2 data acquisition (DAQ) board. 
 
-## [https://docs.google.com/spreadsheets/d/11PVgNdWwZuFMgkslr21FnstDzzs_OCHczlblnQA5oqc/edit#gid=0](https://docs.google.com/spreadsheets/d/11PVgNdWwZuFMgkslr21FnstDzzs_OCHczlblnQA5oqc/edit#gid=0)  
+### [Ground DAQ Spec](https://docs.google.com/document/d/13VDrlMz54n0tT20tYANPPuO85ihRtZlENfx5LBO277A/edit#)  
+
+### [BOM](https://docs.google.com/spreadsheets/d/11PVgNdWwZuFMgkslr21FnstDzzs_OCHczlblnQA5oqc/edit#gid=0)  
