@@ -2,4 +2,5 @@
   (lib (name "star-common-lib")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/star-common-lib.pretty")(options "")(descr ""))
   (lib (name "Ellie_Project_Footprints")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/ELLIE/footprints/Ellie_Project_Footprints.pretty")(options "")(descr ""))
   (lib (name "TPS54332DDAR")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/TPS54332DDAR")(options "")(descr ""))
+  (lib (name "TCA9535PWR")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/TCA9535PWR")(options "")(descr ""))
 )

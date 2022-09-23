@@ -3,4 +3,5 @@
   (lib (name "ELLIE_Symbol_Library")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/ELLIE/symbols/ELLIE_Symbol_Library.kicad_sym")(options "")(descr ""))
   (lib (name "star-common-lib")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/star-common-lib.kicad_sym")(options "")(descr ""))
   (lib (name "TPS54332DDAR")(type "Legacy")(uri "${KIPRJMOD}/hardware-sch-blocks/TPS54332DDAR/TPS54332DDAR.lib")(options "")(descr ""))
+  (lib (name "TCA9535PWR")(type "Legacy")(uri "${KIPRJMOD}/hardware-sch-blocks/TCA9535PWR/TCA9535PWR.lib")(options "")(descr ""))
 )
