@@ -1,4 +1,4 @@
-19929579803552731
+19931243729309322
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -79043,6 +79043,13 @@ Logo WEEE
 0
 0
 0
+TCA9535PWR
+SOP65P640X120-24N
+
+
+0
+24
+24
 TPS54332DDAR
 VREG_LM5017MR_NOPB
 
