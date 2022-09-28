@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "le2lib")(type "KiCad")(uri "${KIPRJMOD}/../hardware-sch-blocks/ELLIE/symbols/ELLIE_Symbol_Library.kicad_sym")(options "")(descr ""))
+)
