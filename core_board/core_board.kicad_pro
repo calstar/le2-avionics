@@ -405,6 +405,14 @@
     [
       "55992e35-fe7b-468a-9b7a-1e4dc931b904",
       ""
+    ],
+    [
+      "3e3a6d12-2d26-4cac-b4d5-aabf78002216",
+      "buck_converter"
+    ],
+    [
+      "64c7445b-825d-4495-b3ff-c4990ba4091f",
+      "buck_converter1"
     ]
   ],
   "text_variables": {}
