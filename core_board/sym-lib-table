@@ -7,4 +7,5 @@
   (lib (name "TCA9548A_Breakout")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/TCA9548A_Breakout/TCA9548A_Breakout.kicad_sym")(options "")(descr ""))
   (lib (name "MCP23017_Breakout")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/MCP23017_Breakout/MCP23017_Breakout.kicad_sym")(options "")(descr ""))
   (lib (name "LD1117V33")(type "Legacy")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/LD1117V33/LD1117V33.lib")(options "")(descr ""))
+  (lib (name "PCIE_Socket")(type "Legacy")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/PCIE-LP-01-01-F-DV-A-TR/PCIE-LP-01-01-F-DV-A-TR.lib")(options "")(descr ""))
 )
