@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name "le2lib")(type "KiCad")(uri "${KIPRJMOD}/../hardware-sch-blocks/ELLIE/symbols/ELLIE_Symbol_Library.kicad_sym")(options "")(descr ""))
+  (lib (name "MAX31865_Breakout")(type "KiCad")(uri "C:/Users/Gre8n/Documents/Berkeley/STAR/le2/hardware-sch-blocks/LE2/MAX31865_Breakout/MAX31865_Breakout.kicad_sym")(options "")(descr ""))
 )

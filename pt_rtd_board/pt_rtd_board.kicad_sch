@@ -902,7 +902,7 @@
     (uuid 2dc49687-fe67-4205-a3e3-9eaf94b2e3ab)
     (property "Reference" "U?" (id 0) (at 190.881 19.2745 0))
     (property "Value" "MAX31865_Breakout_Board" (id 1) (at 191.262 21.336 0))
-    (property "Footprint" "" (id 2) (at 191.516 38.354 0)
+    (property "Footprint" "MAX31865_Breakout:MAX31865_Breakout" (id 2) (at 191.516 38.354 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 191.516 38.354 0)
@@ -1215,7 +1215,7 @@
       (reference "U?") (unit 1) (value "HX711_Breakout") (footprint "Ellie_Project_Footprints:HX711_Breakout_Board")
     )
     (path "/2dc49687-fe67-4205-a3e3-9eaf94b2e3ab"
-      (reference "U?") (unit 1) (value "MAX31865_Breakout_Board") (footprint "")
+      (reference "U?") (unit 1) (value "MAX31865_Breakout_Board") (footprint "MAX31865_Breakout:MAX31865_Breakout")
     )
   )
 )
