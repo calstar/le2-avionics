@@ -4,4 +4,6 @@
   (lib (name "TCA9548A")(type "KiCad")(uri "${KIPRJMOD}/TCA9548A/TCA9548A.kicad_sym")(options " pwr_sym_only")(descr ""))
   (lib (name "TCA9548A_Breakout")(type "KiCad")(uri "C:/Users/Susanne/STAR/le2-avionics/hardware-sch-blocks/TCA9548A_Breakout.kicad_sym")(options "")(descr ""))
   (lib (name "ELLIE_Symbol_Library")(type "KiCad")(uri "C:/Users/Susanne/STAR/le2-avionics/hardware-sch-blocks/ELLIE_Symbol_Library.kicad_sym")(options "")(descr ""))
+  (lib (name "MAX31865")(type "KiCad")(uri "C:/Users/Susanne/STAR/hardware-sch-blocks/MAX31865/MAX31865.kicad_sym")(options "")(descr ""))
+  (lib (name "PCF8575_Breakout")(type "KiCad")(uri "C:/Users/Susanne/STAR/hardware-sch-blocks/LE2/PCF8575_Breakout/PCF8575_Breakout.kicad_sym")(options "")(descr ""))
 )
