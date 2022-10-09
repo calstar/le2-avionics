@@ -1,4 +1,4 @@
-19937902247552248
+19937903734327911
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -56748,13 +56748,6 @@ Yellow 5381 Series LED
 0
 2
 2
-MCP23017_Breakout
-MCP23017_Breakout
-
-
-0
-0
-0
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -60353,6 +60346,13 @@ DIL DIP PDIP 2.54mm 7.62mm 300mil
 0
 4
 4
+PCF8575_Breakout
+PCF8575_Breakout
+
+
+0
+25
+25
 PCIE_Socket
 SAMTEC_PCIE-LP-01-01-F-DV-A-TR
 
@@ -79076,8 +79076,8 @@ TCA9548A_Breakout
 
 
 0
-0
-0
+24
+24
 TPS54332DDAR
 VREG_LM5017MR_NOPB
 

@@ -4,7 +4,7 @@
   (lib (name "TPS54332DDAR")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/TPS54332DDAR")(options "")(descr ""))
   (lib (name "TCA9535PWR")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/TCA9535PWR")(options "")(descr ""))
   (lib (name "TCA9548A_Breakout")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/TCA9548A_Breakout/TCA9548A_Breakout.pretty")(options "")(descr ""))
-  (lib (name "MCP23017_Breakout")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/MCP23017_Breakout/MCP23017_Breakout.pretty")(options "")(descr ""))
   (lib (name "LD1117V33")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/LD1117V33")(options "")(descr ""))
   (lib (name "PCIE_Socket")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/PCIE-LP-01-01-F-DV-A-TR")(options "")(descr ""))
+  (lib (name "PCF8575_Breakout")(type "KiCad")(uri "${KIPRJMOD}/hardware-sch-blocks/LE2/PCF8575_Breakout/PCF8575_Breakout.pretty")(options "")(descr ""))
 )

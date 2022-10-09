@@ -407,12 +407,12 @@
       ""
     ],
     [
-      "3e3a6d12-2d26-4cac-b4d5-aabf78002216",
-      "buck_converter"
-    ],
-    [
       "64c7445b-825d-4495-b3ff-c4990ba4091f",
       "buck_converter1"
+    ],
+    [
+      "d7fcead5-046f-4466-9d0b-858f635323a4",
+      "buck_converter2"
     ]
   ],
   "text_variables": {}
