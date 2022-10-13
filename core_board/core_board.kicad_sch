@@ -696,6 +696,71 @@
         )
       )
     )
+    (symbol "Jumper:Jumper_3_Bridged12" (pin_names (offset 0) hide) (in_bom yes) (on_board yes)
+      (property "Reference" "JP" (id 0) (at -2.54 -2.54 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Value" "Jumper_3_Bridged12" (id 1) (at 0 2.794 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (id 2) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "~" (id 3) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "Jumper SPDT" (id 4) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "Jumper, 3-pole, pins 1+2 closed/bridged" (id 5) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_fp_filters" "Jumper* TestPoint*3Pads* TestPoint*Bridge*" (id 6) (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "Jumper_3_Bridged12_0_0"
+        (circle (center -3.302 0) (radius 0.508)
+          (stroke (width 0) (type default) (color 0 0 0 0))
+          (fill (type none))
+        )
+        (circle (center 0 0) (radius 0.508)
+          (stroke (width 0) (type default) (color 0 0 0 0))
+          (fill (type none))
+        )
+        (circle (center 3.302 0) (radius 0.508)
+          (stroke (width 0) (type default) (color 0 0 0 0))
+          (fill (type none))
+        )
+      )
+      (symbol "Jumper_3_Bridged12_0_1"
+        (arc (start -0.254 0.508) (mid -1.651 0.9912) (end -3.048 0.508)
+          (stroke (width 0) (type default) (color 0 0 0 0))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 -1.27)
+            (xy 0 -0.508)
+          )
+          (stroke (width 0) (type default) (color 0 0 0 0))
+          (fill (type none))
+        )
+      )
+      (symbol "Jumper_3_Bridged12_1_1"
+        (pin passive line (at -6.35 0 0) (length 2.54)
+          (name "A" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+        (pin input line (at 0 -3.81 90) (length 2.54)
+          (name "C" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 6.35 0 180) (length 2.54)
+          (name "B" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
     (symbol "LD1117V33:LD1117V33" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
       (property "Reference" "U" (id 0) (at -10.16 5.842 0)
         (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -1828,9 +1893,6 @@
   (junction (at 219.456 62.738) (diameter 0) (color 0 0 0 0)
     (uuid d41391eb-b171-4635-876a-25165a73b425)
   )
-  (junction (at 217.424 259.588) (diameter 0) (color 0 0 0 0)
-    (uuid d41a9fab-cc09-442b-8a17-19a0579232ca)
-  )
   (junction (at 330.962 123.698) (diameter 0) (color 0 0 0 0)
     (uuid d47ce923-5b74-47b5-90f4-31388863b6e2)
   )
@@ -2028,10 +2090,6 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 04c8a5c6-a33b-4a8c-9bce-66a4f281d023)
   )
-  (wire (pts (xy 217.424 254.762) (xy 217.424 259.588))
-    (stroke (width 0) (type default) (color 0 0 0 0))
-    (uuid 04f93285-21d6-4ba1-b795-c0b97bed2b6f)
-  )
   (wire (pts (xy 272.034 123.698) (xy 274.574 123.698))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 051f87bc-e738-40a1-87ae-883aa1ca5451)
@@ -2043,10 +2101,6 @@
   (wire (pts (xy 302.514 126.238) (xy 305.054 126.238))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 057fa908-0b4e-4725-935c-0bb31afcb7cd)
-  )
-  (wire (pts (xy 217.424 259.588) (xy 215.138 259.588))
-    (stroke (width 0) (type default) (color 0 0 0 0))
-    (uuid 059273b3-258f-4812-b85e-d173d97cd42b)
   )
   (wire (pts (xy 283.464 279.654) (xy 286.004 279.654))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -2587,7 +2641,7 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 33c0ae77-b235-4e5d-8e51-40ec8b576c02)
   )
-  (wire (pts (xy 194.818 259.588) (xy 204.978 259.588))
+  (wire (pts (xy 194.818 259.588) (xy 224.282 259.588))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 33d00038-9c17-467c-b9a6-694abda23296)
   )
@@ -2631,10 +2685,6 @@
   (wire (pts (xy 215.392 133.858) (xy 217.932 133.858))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 36f2b489-8bc1-46d5-b6b5-9173e7e1aa24)
-  )
-  (wire (pts (xy 217.424 274.828) (xy 217.424 259.588))
-    (stroke (width 0) (type default) (color 0 0 0 0))
-    (uuid 3738a34e-e60c-4b80-b5e4-703b70def575)
   )
   (wire (pts (xy 254 265.176) (xy 256.54 265.176))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -3437,6 +3487,10 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 7ce64f43-1351-42df-8bbb-d6bc436300cf)
   )
+  (wire (pts (xy 224.282 254.762) (xy 221.234 254.762))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 7d07f231-301b-463d-91ce-61f7c9e6413d)
+  )
   (wire (pts (xy 245.872 136.398) (xy 248.412 136.398))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 7d755975-6a87-4d9b-be1b-3394ae62486a)
@@ -3581,7 +3635,7 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 87a836ea-0950-4180-859b-7fde27339360)
   )
-  (wire (pts (xy 205.486 274.828) (xy 217.424 274.828))
+  (wire (pts (xy 205.486 274.828) (xy 214.884 274.828))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 88e4f7c8-1a74-4722-bb72-1b4b83e7abed)
   )
@@ -3812,6 +3866,10 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 9cf51936-c18d-4a0b-9540-11917cd71a6a)
   )
+  (wire (pts (xy 214.884 258.572) (xy 214.884 274.828))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 9cfdcefa-c498-49c9-a3a1-3a7a59511c70)
+  )
   (wire (pts (xy 51.054 31.496) (xy 56.388 31.496))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 9d0d6feb-48e3-4f5e-9be9-e92c030dfc9d)
@@ -3975,7 +4033,7 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid aa224cee-bd23-482e-b090-11699facb88d)
   )
-  (wire (pts (xy 201.168 254.762) (xy 204.978 254.762))
+  (wire (pts (xy 201.168 254.762) (xy 208.534 254.762))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid aa969b08-19c0-42f4-b0d6-4b1f149cfcfd)
   )
@@ -4064,10 +4122,6 @@
     (uuid b0464a88-0748-4363-be95-a69d31c49da1)
   )
 
-  (wire (pts (xy 217.424 254.762) (xy 215.138 254.762))
-    (stroke (width 0) (type default) (color 0 0 0 0))
-    (uuid b05ec9f6-d56e-4428-9a09-ddefe04acbaf)
-  )
   (wire (pts (xy 274.574 113.538) (xy 277.114 113.538))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid b088c758-1677-4768-8949-f9690acc5a74)
@@ -4811,6 +4865,10 @@
   (wire (pts (xy 358.902 65.278) (xy 359.918 65.278))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid f4d95444-8527-43ff-89a3-5e2d6395d506)
+  )
+  (wire (pts (xy 224.282 259.588) (xy 224.282 254.762))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid f5205ac6-7c4c-4132-9e10-e1f8388c0f2d)
   )
   (wire (pts (xy 86.614 114.046) (xy 89.154 114.046))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -6274,6 +6332,22 @@
     (pin "1" (uuid 6c6e6c0a-4477-494a-bac2-44235816b539))
   )
 
+  (symbol (lib_id "Jumper:Jumper_3_Bridged12") (at 214.884 254.762 0) (unit 1)
+    (in_bom yes) (on_board yes) (fields_autoplaced)
+    (uuid 2dfa0c75-fd52-40fc-883d-7c2bcf8147bb)
+    (property "Reference" "JP?" (id 0) (at 214.884 249.174 0))
+    (property "Value" "Jumper_3_Bridged12" (id 1) (at 214.884 251.714 0))
+    (property "Footprint" "" (id 2) (at 214.884 254.762 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (id 3) (at 214.884 254.762 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a4171e30-72e4-431f-aff5-ea467764aba5))
+    (pin "2" (uuid ddd7290c-9338-4156-8fc4-c8c1045ba903))
+    (pin "3" (uuid e754b196-89e8-4d10-b26c-51145ea5a722))
+  )
+
   (symbol (lib_id "Device:R_Small_US") (at 280.924 245.872 90) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 2fea9376-e64b-4ea0-a2be-bfafcd0c9189)
@@ -6385,21 +6459,6 @@
     )
     (pin "1" (uuid 082cc71f-6129-4b45-bbfe-b79b608aad1b))
     (pin "2" (uuid 1cb505d4-7ecb-4ca4-be0e-bc2dd2e6ebd2))
-  )
-
-  (symbol (lib_id "Jumper:Jumper_2_Open") (at 210.058 259.588 0) (unit 1)
-    (in_bom yes) (on_board yes)
-    (uuid 3955fae5-3d54-43b5-ac60-65cce656ad97)
-    (property "Reference" "JP?" (id 0) (at 205.486 262.636 0))
-    (property "Value" "Jumper" (id 1) (at 212.598 262.636 0))
-    (property "Footprint" "" (id 2) (at 210.058 259.588 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (id 3) (at 210.058 259.588 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid ca398235-386a-45ff-99a9-87e9379c5948))
-    (pin "2" (uuid 9ae16207-c8b9-416d-9637-143ecf3b8a1b))
   )
 
   (symbol (lib_id "power:GND") (at 86.614 80.518 0) (unit 1)
@@ -9076,21 +9135,6 @@
     (pin "1" (uuid da7f999e-a1f9-4d27-b15b-f656852f6ba3))
   )
 
-  (symbol (lib_id "Jumper:Jumper_2_Open") (at 210.058 254.762 0) (unit 1)
-    (in_bom yes) (on_board yes)
-    (uuid e420abde-be80-4cf1-ad6c-d76832444d3a)
-    (property "Reference" "JP?" (id 0) (at 205.486 251.714 0))
-    (property "Value" "Jumper" (id 1) (at 212.598 251.714 0))
-    (property "Footprint" "" (id 2) (at 210.058 254.762 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (id 3) (at 210.058 254.762 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid d5b5e356-46b9-4d6a-9c5d-999b601b05f7))
-    (pin "2" (uuid f73b3da0-7cc9-4c31-b187-e2b2f98d0f0c))
-  )
-
   (symbol (lib_id "power:GND") (at 147.32 192.786 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid e4397add-7b7c-4f48-8a49-6d769130aa7a)
@@ -9706,10 +9750,10 @@
     (path "/1e9cdc4f-9f4f-492a-ac02-02d4314be397"
       (reference "C?") (unit 1) (value "10uF") (footprint "")
     )
-    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/434eb6f5-6eac-435c-ac88-884597750c94"
+    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/434eb6f5-6eac-435c-ac88-884597750c94"
       (reference "C?") (unit 1) (value "47uF") (footprint "")
     )
-    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/434eb6f5-6eac-435c-ac88-884597750c94"
+    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/434eb6f5-6eac-435c-ac88-884597750c94"
       (reference "C?") (unit 1) (value "47uF") (footprint "")
     )
     (path "/d7fcead5-046f-4466-9d0b-858f635323a4/438c05d0-302a-4f64-b6eb-38c7107b0a77"
@@ -9751,10 +9795,10 @@
     (path "/d51bd63d-4633-4c71-a928-54ef47eb5508"
       (reference "C?") (unit 1) (value "10uF") (footprint "")
     )
-    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/f58a8448-b805-43fc-b68e-89061fe0fd94"
+    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/f58a8448-b805-43fc-b68e-89061fe0fd94"
       (reference "C?") (unit 1) (value "47uF") (footprint "")
     )
-    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/f58a8448-b805-43fc-b68e-89061fe0fd94"
+    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/f58a8448-b805-43fc-b68e-89061fe0fd94"
       (reference "C?") (unit 1) (value "47uF") (footprint "")
     )
     (path "/2ff6e4be-02c6-41ca-b569-efdd4c472bb1"
@@ -9778,10 +9822,10 @@
     (path "/717e691f-8ded-4684-a35f-32641d281944"
       (reference "D?") (unit 1) (value "40V") (footprint "Diode_SMD:D_0603_1608Metric")
     )
-    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/ba39e9ff-ba66-4815-b792-5e6d879e1913"
+    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/ba39e9ff-ba66-4815-b792-5e6d879e1913"
       (reference "D?") (unit 1) (value "B340") (footprint "Diode_SMD:D_SMC")
     )
-    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/ba39e9ff-ba66-4815-b792-5e6d879e1913"
+    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/ba39e9ff-ba66-4815-b792-5e6d879e1913"
       (reference "D?") (unit 1) (value "B340") (footprint "Diode_SMD:D_SMC")
     )
     (path "/be74bd79-ae40-472a-877e-a1a25bfe9019"
@@ -9820,13 +9864,10 @@
     (path "/ce500ca5-6073-4ec4-a952-1799e9ba718c"
       (reference "J?") (unit 1) (value "PCIE-LP-01-01-F-DV-A-TR") (footprint "SAMTEC_PCIE-LP-01-01-F-DV-A-TR")
     )
-    (path "/3955fae5-3d54-43b5-ac60-65cce656ad97"
-      (reference "JP?") (unit 1) (value "Jumper") (footprint "")
+    (path "/2dfa0c75-fd52-40fc-883d-7c2bcf8147bb"
+      (reference "JP?") (unit 1) (value "Jumper_3_Bridged12") (footprint "")
     )
     (path "/cf99aa9d-5be2-4520-b095-dc89983c27d8"
-      (reference "JP?") (unit 1) (value "Jumper") (footprint "")
-    )
-    (path "/e420abde-be80-4cf1-ad6c-d76832444d3a"
       (reference "JP?") (unit 1) (value "Jumper") (footprint "")
     )
     (path "/ebffbb15-9cff-44c0-818b-68ed02b0fcee"
@@ -9841,10 +9882,10 @@
     (path "/0460669e-1215-450a-a7ab-80d187153cdb"
       (reference "R?") (unit 1) (value "330") (footprint "")
     )
-    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/08d01e74-1336-48fa-a803-60fd2a434a7d"
+    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/08d01e74-1336-48fa-a803-60fd2a434a7d"
       (reference "R?") (unit 1) (value "10k") (footprint "")
     )
-    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/08d01e74-1336-48fa-a803-60fd2a434a7d"
+    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/08d01e74-1336-48fa-a803-60fd2a434a7d"
       (reference "R?") (unit 1) (value "10k") (footprint "")
     )
     (path "/0c786dc4-52ad-4ed5-b03f-2d6847d65a45"
@@ -9919,16 +9960,16 @@
     (path "/83899034-d72b-4d72-b360-2350e96bde69"
       (reference "R?") (unit 1) (value "4.7k") (footprint "")
     )
-    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/8818beed-4394-49d5-a315-ab0a62a7e5e1"
-      (reference "R?") (unit 1) (value "50k") (footprint "")
-    )
     (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/8818beed-4394-49d5-a315-ab0a62a7e5e1"
       (reference "R?") (unit 1) (value "50k") (footprint "")
     )
-    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/8edc48e1-08a2-4ab3-a762-de13c48f8c3f"
-      (reference "R?") (unit 1) (value "1M") (footprint "")
+    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/8818beed-4394-49d5-a315-ab0a62a7e5e1"
+      (reference "R?") (unit 1) (value "50k") (footprint "")
     )
     (path "/d7fcead5-046f-4466-9d0b-858f635323a4/8edc48e1-08a2-4ab3-a762-de13c48f8c3f"
+      (reference "R?") (unit 1) (value "1M") (footprint "")
+    )
+    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/8edc48e1-08a2-4ab3-a762-de13c48f8c3f"
       (reference "R?") (unit 1) (value "1M") (footprint "")
     )
     (path "/964fea29-f477-496d-9622-9ea1763a74ba"
@@ -9973,10 +10014,10 @@
     (path "/dd8ecf65-a8e4-492c-9cdb-eac425dea6e8"
       (reference "R?") (unit 1) (value "1k") (footprint "")
     )
-    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/df0b43da-9f0e-48f8-8af9-0146382cf277"
+    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/df0b43da-9f0e-48f8-8af9-0146382cf277"
       (reference "R?") (unit 1) (value "150k") (footprint "")
     )
-    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/df0b43da-9f0e-48f8-8af9-0146382cf277"
+    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/df0b43da-9f0e-48f8-8af9-0146382cf277"
       (reference "R?") (unit 1) (value "150k") (footprint "")
     )
     (path "/df6abb79-3bc6-4d86-abb7-5791c7e90ca6"
@@ -10078,10 +10119,10 @@
     (path "/d6cc26a0-8644-4a7e-b46e-915b392648c7"
       (reference "U?") (unit 1) (value "PCF8575_Breakout") (footprint "")
     )
-    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/f1f29832-eb98-4642-8266-28e3a8357066"
+    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/f1f29832-eb98-4642-8266-28e3a8357066"
       (reference "U?") (unit 1) (value "TPS54332DDAR") (footprint "VREG_LM5017MR/NOPB")
     )
-    (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/f1f29832-eb98-4642-8266-28e3a8357066"
+    (path "/d7fcead5-046f-4466-9d0b-858f635323a4/f1f29832-eb98-4642-8266-28e3a8357066"
       (reference "U?") (unit 1) (value "TPS54332DDAR") (footprint "VREG_LM5017MR/NOPB")
     )
     (path "/f4a45711-e689-476a-867a-0ff60e56d61c"
