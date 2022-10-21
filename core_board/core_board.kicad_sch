@@ -9993,10 +9993,10 @@
       (reference "D9") (unit 1) (value "LED") (footprint "LED_SMD:LED_0603_1608Metric")
     )
     (path "/64c7445b-825d-4495-b3ff-c4990ba4091f/ba39e9ff-ba66-4815-b792-5e6d879e1913"
-      (reference "D10") (unit 1) (value "B340") (footprint "Diode_SMD:D_SMC")
+      (reference "D10") (unit 1) (value "B340") (footprint "Diode_SMD:D_SMA")
     )
     (path "/d7fcead5-046f-4466-9d0b-858f635323a4/ba39e9ff-ba66-4815-b792-5e6d879e1913"
-      (reference "D11") (unit 1) (value "B340") (footprint "Diode_SMD:D_SMC")
+      (reference "D11") (unit 1) (value "B340") (footprint "Diode_SMD:D_SMA")
     )
     (path "/89628ef4-e6ac-4807-85d4-c52f8cf9e136"
       (reference "J1") (unit 1) (value "Conn_01x02") (footprint "Ellie_Project_Footprints:DEANS")

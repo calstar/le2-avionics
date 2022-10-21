@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "/Users/cooper/Desktop/Avionics/le2-avionics/core_board/core_board.kicad_sch")
-    (date "Friday, October 14, 2022 at 04:54:55 PM")
+    (date "Thursday, October 20, 2022 at 09:30:51 PM")
     (tool "Eeschema (6.0.1-0)")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -1039,7 +1039,7 @@
       (tstamps "c6e11254-b3c3-4f1b-ba5f-7c7a1a5478ed"))
     (comp (ref "D10")
       (value "B340")
-      (footprint "Diode_SMD:D_SMC")
+      (footprint "Diode_SMD:D_SMA")
       (datasheet "http://www.jameco.com/Jameco/Products/ProdDS/1538777.pdf")
       (libsource (lib "Diode") (part "B340") (description "40V 3A Schottky Barrier Rectifier Diode, SMC"))
       (property (name "Sheetname") (value "buck_converter1"))
@@ -1182,7 +1182,7 @@
       (tstamps "c6e11254-b3c3-4f1b-ba5f-7c7a1a5478ed"))
     (comp (ref "D11")
       (value "B340")
-      (footprint "Diode_SMD:D_SMC")
+      (footprint "Diode_SMD:D_SMA")
       (datasheet "http://www.jameco.com/Jameco/Products/ProdDS/1538777.pdf")
       (libsource (lib "Diode") (part "B340") (description "40V 3A Schottky Barrier Rectifier Diode, SMC"))
       (property (name "Sheetname") (value "buck_converter2"))

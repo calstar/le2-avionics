@@ -906,7 +906,7 @@
     (property "Value" "B340" (id 1) (at 125.222 106.1084 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Diode_SMD:D_SMC" (id 2) (at 117.983 105.156 0)
+    (property "Footprint" "Diode_SMD:D_SMA" (id 2) (at 117.983 105.156 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "http://www.jameco.com/Jameco/Products/ProdDS/1538777.pdf" (id 3) (at 122.428 105.156 0)
