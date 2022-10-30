@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name "ELLIE_Symbol_Library")(type "KiCad")(uri "${KIPRJMOD}/../hardware-sch-blocks/ELLIE/symbols/ELLIE_Symbol_Library.kicad_sym")(options "")(descr ""))
+  (lib (name "PCF8575_Breakout")(type "KiCad")(uri "${KIPRJMOD}/../hardware-sch-blocks/LE2/PCF8575_Breakout/PCF8575_Breakout.kicad_sym")(options "")(descr ""))
+  (lib (name "PCIE")(type "Legacy")(uri "${KIPRJMOD}/../hardware-sch-blocks/LE2/PCIE-LP-01-01-F-DV-A-TR/PCIE-LP-01-01-F-DV-A-TR.lib")(options "")(descr ""))
+)
