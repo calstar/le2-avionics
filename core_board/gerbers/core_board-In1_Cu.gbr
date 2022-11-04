@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,(6.0.1-0)*%
-%TF.CreationDate,2022-11-03T20:07:30-07:00*%
+%TF.CreationDate,2022-11-03T20:24:14-07:00*%
 %TF.ProjectId,core_board,636f7265-5f62-46f6-9172-642e6b696361,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Copper,L2,Inr*%
 %TF.FilePolarity,Positive*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW (6.0.1-0)) date 2022-11-03 20:07:30*
+G04 Created by KiCad (PCBNEW (6.0.1-0)) date 2022-11-03 20:24:14*
 %MOMM*%
 %LPD*%
 G01*
@@ -259,13 +259,13 @@ D14*
 %TO.C,TP11*%
 X237490000Y-189738000D03*
 %TD*%
-D16*
-%TO.N,Net-(JP1-Pad2)*%
-%TO.C,JP1*%
-X134874000Y-248666000D03*
 D15*
 %TO.N,+3V3*%
+%TO.C,JP1*%
 X134874000Y-251206000D03*
+D16*
+%TO.N,Net-(JP1-Pad2)*%
+X134874000Y-248666000D03*
 %TD*%
 D19*
 %TO.N,/Button_0*%
@@ -427,15 +427,15 @@ D11*
 %TO.C,REF\u002A\u002A*%
 X237490000Y-236220000D03*
 %TD*%
-D16*
-%TO.N,Net-(JP3-Pad3)*%
-%TO.C,JP3*%
-X129540000Y-149606000D03*
-%TO.N,/SPI_CS_CORE*%
-X129540000Y-147066000D03*
 D15*
 %TO.N,Net-(JP3-Pad1)*%
+%TO.C,JP3*%
 X129540000Y-144526000D03*
+D16*
+%TO.N,/SPI_CS_CORE*%
+X129540000Y-147066000D03*
+%TO.N,Net-(JP3-Pad3)*%
+X129540000Y-149606000D03*
 %TD*%
 D14*
 %TO.N,/SPI_MISO*%
