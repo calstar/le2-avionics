@@ -3,22 +3,43 @@
 /* Constructor for the CoreBoard class. */
 CoreBoard::CoreBoard() {
 
+  /* Initialize the I2C_FAST bus. */
   I2C_fast = new TwoWire(0);
-  I2C_slow = new TwoWire(1);
-
   I2C_fast->begin(PIN_I2C_FAST_SDA, PIN_I2C_FAST_SCL, 400000);
+
+  /* Initialize the I2C_SLOW bus. */
+  I2C_slow = new TwoWire(1);
   I2C_slow->begin(PIN_I2C_SLOW_SDA, PIN_I2C_SLOW_SCL, 400000);
 
+  /* Initialize the TCA9548A I2C mux. The ESP32 uses the I2C_SLOW
+   * bus to communicate with the I2C mux. */
   I2C_mux = new TCA9548A(I2C_MUX_ADDRESS);
 	I2C_mux->begin(*I2C_slow);
   I2C_mux->closeAll();
 
+  /* Initialize the PCF8575 I/O Expander. The ESP32 uses the I2C_SLOW
+   * bus to communicate with the I/O Expander. */
   uint16_t io_expander_initial_value = 0x0000;
   IO_expander = new PCF8575(IO_EXPANDER_ADDRESS, I2C_slow);
   IO_expander->begin(PIN_I2C_SLOW_SDA, PIN_I2C_SLOW_SCL, io_expander_initial_value);
+  pinMode(PIN_IO_EXPANDER_INTERRUPT, INPUT);
 
-  spi_settings = &SPISettings(14000000, MSBFIRST, SPI_MODE0);
+  /* Initialize the SPI_CORE bus, and also initialize the SD Card. The
+   * SPI_CORE bus is used only for communicating with the SD Card. */
+  SPI_core = new SPIClass(VSPI);
+  SPI_core->begin(SPI_SCK_CORE, SPI_MISO_CORE, SPI_MOSI_CORE, SPI_CS_CORE);
+  pinMode(SPI_CS_CORE, OUTPUT);
+  SD.begin(SPI_CS_CORE);
 
+  /* Initialize the SPI_PERIPHERAL bus. The SPI_PERIPHERAL bus is used for
+   * communicating with all of the SPI devices on the peripheral boards. */
+  SPI_peripheral = new SPIClass(HSPI);
+  SPI_peripheral->begin(SPI_SCK, SPI_MISO, SPI_MOSI, SPI_CS_0);
+  pinMode(SPI_CS_0, OUTPUT);
+  pinMode(SPI_CS_1, OUTPUT);
+  pinMode(SPI_CS_2, OUTPUT);
+
+  /* Initialize the BROADCAST pin. */
   pinMode(PIN_BROADCAST, OUTPUT);
   digitalWrite(PIN_BROADCAST, LOW);
 
@@ -30,20 +51,17 @@ CoreBoard::CoreBoard() {
  * to a slot on the core board.
  * id: The numerical ID of the peripheral board which the core
  * board should be connected to.
- * returns: the slot number (0 to 7) that the peripheral board is
- * connected to. If the peripheral board is not found, return -1. */
+ * returns: The slot number (0 to 7) that the peripheral board is
+ * connected to. If the peripheral board is not found, or if 
+ * it is found multiple times, return -1. */
 int CoreBoard::FindPeripheralBoard(int id) {
-
 	int noise_tolerance = 40;
-
 	bool found_board = false;
 	int slot_with_correct_board = -1;
-
 	int adc_inputs[8] = {analogRead(PIN_BOARD_ID_0), analogRead(PIN_BOARD_ID_1),
 						           analogRead(PIN_BOARD_ID_2), analogRead(PIN_BOARD_ID_3),
 						           analogRead(PIN_BOARD_ID_4), analogRead(PIN_BOARD_ID_5),
 						           analogRead(PIN_BOARD_ID_6), analogRead(PIN_BOARD_ID_7)};
-
 	for (int slot = 0; slot < 7; slot++) {
 		int adc_value = adc_inputs[slot];
 		if (abs(id - adc_value) < noise_tolerance) {
@@ -55,87 +73,11 @@ int CoreBoard::FindPeripheralBoard(int id) {
 			}
 		}
 	}
-
 	if (found_board) {
 		return slot_with_correct_board;
 	} else {
 		return -1;
 	}
-
-}
-
-/* Write to the I2C bus on a peripheral board.
- * slot: The slot number (0 to 7) of the peripheral board to write to.
- * address: The address of the I2C device to write to.
- * buf_out: The buffer with data to be written to the bus.
- * len: How many bytes to write. 
- * returns: 0 on success, -1 on error. */
-int CoreBoard::I2CWrite(int slot, uint8_t address, uint8_t* buf_out, uint8_t length) {
-	if (slot < 0 or slot > 7) {
-		return -1;
-	}
-	I2C_mux->openChannel(slot);
-	I2C_slow->beginTransmission(address);
-  I2C_slow->write(buf_out, length);
-  if (I2C_slow->endTransmission() != 0) {
-		return -1;
-	}
-  I2C_mux->closeChannel(slot);
-  return 0;
-}
-
-/* Read from the I2C bus on a peripheral board.
- * slot: The slot number (0 to 7) of the peripheral board to write to.
- * address: The address of the I2C device to write to.
- * buf_in: The empty buffer that the data from the bus will be written to.
- * len: How many bytes to read. 
- * returns: 0 on success, -1 on error. */
-int CoreBoard::I2CRead(int slot, uint8_t address, uint8_t* buf_in, uint8_t length) {
-	if (slot < 0 or slot > 7) {
-		return -1;
-	}
-	I2C_mux->openChannel(slot);
-	I2C_slow->requestFrom(address, length);
-	if (I2C_slow->available() >= length) {
-		for (int byte = 0; byte < length; byte++) {
-			buf_in[byte] = I2C_slow->read();
-		}
-	} else {
-		return -1;
-	}
-	I2C_mux->closeChannel(slot);
-  return 0;
-}
-
-/* Write to the I2C_FAST bus.
- * address: The address of the I2C device to write to.
- * buf_out: The buffer with data to be written to the bus.
- * len: How many bytes to write. 
- * returns: 0 on success, -1 on error. */
-int CoreBoard::I2CFastWrite(uint8_t address, uint8_t buf_out[], uint8_t length) {
-  I2C_fast->beginTransmission(address);
-  I2C_fast->write(buf_out, length);
-  if (I2C_fast->endTransmission() != 0) {
-		return -1;
-	}
-  return 0;
-}
-
-/* Read from the I2C_FAST bus.
- * address: The address of the I2C device to read from.
- * buf_in: The empty buffer that the data from the bus will be written to.
- * len: How many bytes to read.
- * returns: 0 on success, -1 on error. */
-int CoreBoard::I2CFastRead(uint8_t address, uint8_t buf_in[], uint8_t length) {
-	I2C_fast->requestFrom(address, length);
-	if (I2C_fast->available() >= length) {
-		for (int byte = 0; byte < length; byte++) {
-			buf_in[byte] = I2C_fast->read();
-		}
-	} else {
-		return -1;
-	}
-  return 0;
 }
 
 /* Blinks a specific LED repeatedly using the IO Expander. 
@@ -167,25 +109,97 @@ void CoreBoard::BlinkLED(char led_name, int num_blinks) {
  * If multiple buttons are being pressed, or if no buttons are being pressed,
  * then it returns 'X'. */
 char CoreBoard::GetButtonPress() {
-  uint8_t button_values = (uint8_t) (IO_expander->read16() & 0x00FF);
-  switch (button_values) {
-    case 0x01 : return 'A';
-    case 0x02 : return 'B';
-    case 0x04 : return 'C';
-    case 0x08 : return 'D';
-    case 0x10 : return 'E';
-    case 0x20 : return 'F';
-    case 0x40 : return 'G';
-    case 0x80 : return 'H';
+  if (digitalRead(PIN_IO_EXPANDER_INTERRUPT) == LOW) {
+    uint8_t button_values = (uint8_t) (IO_expander->read16() & 0x00FF);
+    switch (button_values) {
+      case 0x01 : return 'A';
+      case 0x02 : return 'B';
+      case 0x04 : return 'C';
+      case 0x08 : return 'D';
+      case 0x10 : return 'E';
+      case 0x20 : return 'F';
+      case 0x40 : return 'G';
+      case 0x80 : return 'H';
+    }
   }
   return 'X';
 }
 
 /* Toggle the broadcast pin to either 1 or 0.
- * value: boolean to set the broadcast pin's output to
- * returns: 0 on success, -1 on error. */
+ * value: Boolean to set the broadcast pin's output to
+ * returns: void. */
 void CoreBoard::SetBroadcast(bool value) {
   digitalWrite(PIN_BROADCAST, value);
 }
 
+/* Checks if the SD card has been connected properly, and
+ * prints out information about the SD card.
+ * returns: 0 if the SD card is properly connected, and -1 otherwise. */
+int CoreBoard::GetSDCardStatus() {
+  if (SD.cardType() == CARD_NONE) {
+    return -1;
+  }
+  uint64_t cardSize = SD.cardSize() / (1024 * 1024);
+  Serial.printf("SD Card Size: %lluMB\n", cardSize);
+  Serial.printf("Total space: %lluMB\n", SD.totalBytes() / (1024 * 1024));
+  Serial.printf("Used space: %lluMB\n", SD.usedBytes() / (1024 * 1024));
+  return 0;
+}
 
+/* Opens a file in the SD card for reading, and prints out the
+ * file contents over the serial port.
+ * filename: The name of the file to read. 
+ * returns: 0 on success, -1 on failure. */
+int CoreBoard::SDCardRead(char *filename) {
+  File file = SD.open(filename, FILE_READ);
+  if (file) {
+    Serial.print("Contents of file ");
+    Serial.print(filename);
+    Serial.println(":");
+    while (file.available()) {
+    	Serial.write(file.read());
+    }
+    file.close();
+    return 0;
+  } else {
+    Serial.print("Unable to open file: ");
+    Serial.println(filename);
+    return -1;
+  }
+}
+
+/* Open a file in the SD card for writing, and write the
+ * provided data to the SD card in that file. If the file does
+ * not exist, then it will be created.
+ * filename: The name of the file to write to.
+ * data: Pointer to the data that should be written to the file.
+ * length: Number of bytes to write to the file.
+ * append: If this is set to true, the data will be appended
+ * to the file without overwriting any previous data.
+ * returns: 0 on success, -1 on failure. */
+int CoreBoard::SDCardWrite(char *filename, uint8_t *data, uint8_t length, bool append) {
+  File file;
+  if (append) {
+    file = SD.open(filename, FILE_APPEND);
+  } else {
+    file = SD.open(filename, FILE_WRITE);
+  }
+  if (file) {
+    file.write(data, length);
+    file.close();
+    return 0;
+  } else {
+    return -1;
+  }
+}
+
+/* Delete a file from the SD card.
+ * filename: The name of the file to delete.
+ * returns: 0 on success, -1 on failure. */
+int CoreBoard::SDCardDelete(char *filename) {
+  if (SD.remove(filename)) {
+    return 0;
+  } else {
+    return -1;
+  }
+}

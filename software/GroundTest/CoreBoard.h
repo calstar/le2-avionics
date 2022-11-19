@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <SPI.h>
+#include <FS.h>
+#include <SD.h>
 
 /* Library: https://www.arduino.cc/reference/en/libraries/tca9548a/ */
 #include <TCA9548A.h>
@@ -37,6 +39,8 @@
 
 #define PIN_BROADCAST 25
 
+#define PIN_IO_EXPANDER_INTERRUPT 4
+
 #define BOARD_ID_IGNITER      430
 #define BOARD_ID_SOLENOID     1018
 #define BOARD_ID_SERVO        1139
@@ -49,26 +53,22 @@
 #define IO_EXPANDER_ADDRESS 0x20
 
 class CoreBoard {
-
-private:
+public:
   TwoWire *I2C_fast;
   TwoWire *I2C_slow;
 	TCA9548A *I2C_mux;
   PCF8575 *IO_expander;
-  SPISettings *spi_settings;
-
-public:
+  SPIClass *SPI_core;
+  SPIClass *SPI_peripheral;
 	CoreBoard();
 	int FindPeripheralBoard(int id);
-  int I2CWrite(int slot, uint8_t address, uint8_t* buf_out, uint8_t length);
-	int I2CRead(int slot, uint8_t address, uint8_t* buf_in, uint8_t length);
-	int I2CFastWrite(uint8_t address, uint8_t buf_out[], uint8_t length);
-	int I2CFastRead(uint8_t address, uint8_t buf_in[], uint8_t length);
   void BlinkLED(char led_name, int num_blinks);
   char GetButtonPress();
   void SetBroadcast(bool value);
-  
-
+  int GetSDCardStatus();
+  int SDCardRead(char *filename);
+  int SDCardWrite(char *filename, uint8_t *data, uint8_t length, bool append);
+  int SDCardDelete(char *filename);
 };
 
 
