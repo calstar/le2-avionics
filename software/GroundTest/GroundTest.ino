@@ -1,8 +1,39 @@
 #include "GroundTest.h"
 
+/* BOARD CONFIGURATION (edit this section to change it) */
+/* ---------------------------------------------------- */
+#define SLOT_IGNITER      0
+#define SLOT_RTD          1
+#define SLOT_THERMOCOUPLE 2
+#define SLOT_PT_A         3
+#define SLOT_PT_B         4
+#define SLOT_SOLENOID     5
+/* ---------------------------------------------------- */
+
+TwoWire *I2C_fast;
 TwoWire *I2C_slow;
 PCF8575 *IO_expander;
+TCA9548A *I2C_mux;
+
 bool button_press_detected = false;
+
+/* Verify that a peripheral board with the provided id is connected
+ * to the provided slot on the core board.
+ * id: The numerical ID of the peripheral board which is inserted
+ * into the core board.
+ * slot: The slot number that the peripheral board is inserted
+ * into the core board (from 0 to 7).
+ * returns: True if the peripheral board is found in that slot, or
+ * false if the peripheral board is not found in that slot. */
+bool FindPeripheralBoard(int id, int slot) {
+	int noise_tolerance = 40;
+	int adc_inputs[8] = {analogRead(PIN_BOARD_ID_0), analogRead(PIN_BOARD_ID_1),
+						           analogRead(PIN_BOARD_ID_2), analogRead(PIN_BOARD_ID_3),
+						           analogRead(PIN_BOARD_ID_4), analogRead(PIN_BOARD_ID_5),
+						           analogRead(PIN_BOARD_ID_6), analogRead(PIN_BOARD_ID_7)};
+	int adc_value = adc_inputs[slot];
+	return (abs(id - adc_value) < noise_tolerance);
+}
 
 /* Blinks a specific LED repeatedly using the IO Expander. 
  * led_name: The identity of the LED to blink (A, B, C, D, E, F, G, H) 
@@ -41,28 +72,95 @@ void IRAM_ATTR OnButtonPress() {
 void setup() {
 
   Serial.begin(115200);
+  Serial.println("Initializing core board...");
 
   /* Initialize the I2C_SLOW bus. */
   I2C_slow = new TwoWire(1);
   I2C_slow->begin(PIN_I2C_SLOW_SDA, PIN_I2C_SLOW_SCL, 400000);
 
   /* Initialize the PCF8575 I/O Expander. The ESP32 uses the I2C_SLOW
-   * bus to communicate with the I/O Expander. */
+   * bus to communicate with the I/O Expander. 
+   * NOTE: Don't initalize the I2C_FAST bus before initializing the PCF8575. */
   uint16_t io_expander_initial_value = 0xFF00;
   IO_expander = new PCF8575(IO_EXPANDER_ADDRESS, I2C_slow);
-  IO_expander->begin(PIN_I2C_SLOW_SDA, PIN_I2C_SLOW_SCL, io_expander_initial_value);
+  if (IO_expander->begin(PIN_I2C_SLOW_SDA, PIN_I2C_SLOW_SCL, io_expander_initial_value)) {
+    Serial.println(" - Connected to PCF8575 IO Expander");
+  } else {
+    Serial.println(" - Unable to connect to PCF8575 IO Expander");
+  }
+
+  /* Setup the interrupt pin so the IO Expander can toggle the interrupt
+   * pin if it detects a button press. */
   pinMode(PIN_IO_EXPANDER_INTERRUPT, INPUT);
   attachInterrupt(PIN_IO_EXPANDER_INTERRUPT, OnButtonPress, FALLING);
 
-  Serial.println("Initialization sucessful!");
+  /* Initialize the TCA9548A I2C mux. The ESP32 uses the I2C_SLOW
+   * bus to communicate with the I2C mux. */
+  I2C_mux = new TCA9548A(I2C_MUX_ADDRESS);
+	I2C_mux->begin(*I2C_slow);
+  I2C_mux->closeAll();
+  // BeginTransmission and then EndTransmission to check if connection works
+  I2C_slow->beginTransmission(I2C_MUX_ADDRESS);
+  if (I2C_slow->endTransmission() == 0) {
+    Serial.println(" - Connected to TCA9548A I2C Mux");
+  } else {
+    Serial.println(" - Unable to connect to TCA9548A I2C Mux");
+  }
+
+  /* Initialize the I2C_FAST bus. */
+  I2C_fast = new TwoWire(0);
+  I2C_fast->begin(PIN_I2C_FAST_SDA, PIN_I2C_FAST_SCL, 400000);
+
+  /* Initialize the BROADCAST pin so we can toggle it to high or low. */
+  pinMode(PIN_BROADCAST, INPUT);
+  digitalWrite(PIN_BROADCAST, LOW);
+
+  /* Check if the peripheral boards are properly connected. */
+  if (FindPeripheralBoard(BOARD_ID_IGNITER, SLOT_IGNITER)) {
+    Serial.println(" - Found peripheral board: Igniter");
+  } else {
+    Serial.println(" - Unable to find peripheral board: Igniter");
+  }
+  if (FindPeripheralBoard(BOARD_ID_RTD, SLOT_RTD)) {
+    Serial.println(" - Found peripheral board: RTD");
+  } else {
+    Serial.println(" - Unable to find peripheral board: RTD");
+  }
+  if (FindPeripheralBoard(BOARD_ID_THERMOCOUPLE, SLOT_THERMOCOUPLE)) {
+    Serial.println(" - Found peripheral board: Thermocouple");
+  } else {
+    Serial.println(" - Unable to find peripheral board: Thermocouple");
+  }
+  if (FindPeripheralBoard(BOARD_ID_PT_A, SLOT_PT_A)) {
+    Serial.println(" - Found peripheral board: Pressure Transducer A");
+  } else {
+    Serial.println(" - Unable to find peripheral board: Pressure Transducer A");
+  }
+  if (FindPeripheralBoard(BOARD_ID_PT_B, SLOT_PT_B)) {
+    Serial.println(" - Found peripheral board: Pressure Transducer B");
+  } else {
+    Serial.println(" - Unable to find peripheral board: Pressure Transducer B");
+  }
+  if (FindPeripheralBoard(BOARD_ID_SOLENOID, SLOT_SOLENOID)) {
+    Serial.println(" - Found peripheral board: Solenoid");
+  } else {
+    Serial.println(" - Unable to find peripheral board: Solenoid");
+  }
+
+  Serial.println("Succesfully initialized core board.");
 
 }
 
 void loop() {
 
   if (button_press_detected) {
+    Serial.println("button press detected.");
     uint16_t all_pins = IO_expander->read16();
     uint8_t button_pins = (uint8_t) (all_pins >> 8);
+    // Delay so that you don't detect multiple button presses
+    // due to the switch bouncing, instead button presses are 
+    // only valid if they're 1 second apart.
+    delay(1000);
     switch (button_pins) {
       case 0xFE : Serial.println("Button press: A"); break;
       case 0xFD : Serial.println("Button press: B"); break;
@@ -74,6 +172,12 @@ void loop() {
       case 0x7F : Serial.println("Button press: H"); break;
     }
     button_press_detected = false;
+    // Reset all the button pins to HIGH. Fixes an issue where you
+    // press one button and then the IO Expander stops being able to
+    // detect any other buttons.
+    IO_expander->write16(0xFF00);
   }
+
+  // ...
   
 }

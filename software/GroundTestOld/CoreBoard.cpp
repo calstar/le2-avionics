@@ -13,9 +13,9 @@ CoreBoard::CoreBoard() {
 
   /* Initialize the TCA9548A I2C mux. The ESP32 uses the I2C_SLOW
    * bus to communicate with the I2C mux. */
-  // I2C_mux = new TCA9548A(I2C_MUX_ADDRESS);
-	// I2C_mux->begin(*I2C_slow);
-  // I2C_mux->closeAll();
+  I2C_mux = new TCA9548A(I2C_MUX_ADDRESS);
+	I2C_mux->begin(*I2C_slow);
+  I2C_mux->closeAll();
 
   /* Initialize the PCF8575 I/O Expander. The ESP32 uses the I2C_SLOW
    * bus to communicate with the I/O Expander. */
