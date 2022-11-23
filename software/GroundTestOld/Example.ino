@@ -7,7 +7,10 @@ void setup() {
   CoreBoard core;
 
   /* -- Get the board slot for a peripheral board, in this case the RTD board */
-  int rtd_board_slot = core.FindPeripheralBoard(BOARD_ID_RTD);
+  int rtd_board_slot = 3;
+  if (!core.FindPeripheralBoard(BOARD_ID_RTD, rtd_board_slot)){
+  	Serial.println("Could not find RTD board!");
+  }
 
   /* -- Communicate with a device on the I2C_FAST bus */
   // LibraryFunction(i2c_bus = core.I2C_fast);

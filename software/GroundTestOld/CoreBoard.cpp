@@ -13,15 +13,15 @@ CoreBoard::CoreBoard() {
 
   /* Initialize the TCA9548A I2C mux. The ESP32 uses the I2C_SLOW
    * bus to communicate with the I2C mux. */
-  I2C_mux = new TCA9548A(I2C_MUX_ADDRESS);
-	I2C_mux->begin(*I2C_slow);
-  I2C_mux->closeAll();
+  // I2C_mux = new TCA9548A(I2C_MUX_ADDRESS);
+	// I2C_mux->begin(*I2C_slow);
+  // I2C_mux->closeAll();
 
   /* Initialize the PCF8575 I/O Expander. The ESP32 uses the I2C_SLOW
    * bus to communicate with the I/O Expander. */
   uint16_t io_expander_initial_value = 0x0000;
   IO_expander = new PCF8575(IO_EXPANDER_ADDRESS, I2C_slow);
-  IO_expander->begin(PIN_I2C_SLOW_SDA, PIN_I2C_SLOW_SCL, io_expander_initial_value);
+  initialized = IO_expander->begin(PIN_I2C_SLOW_SDA, PIN_I2C_SLOW_SCL, io_expander_initial_value);
   pinMode(PIN_IO_EXPANDER_INTERRUPT, INPUT);
 
   /* Initialize the SPI_CORE bus, and also initialize the SD Card. The
@@ -47,37 +47,22 @@ CoreBoard::CoreBoard() {
 
 }
 
-/* Check if a peripheral board with the provided id is connected
- * to a slot on the core board.
- * id: The numerical ID of the peripheral board which the core
- * board should be connected to.
- * returns: The slot number (0 to 7) that the peripheral board is
- * connected to. If the peripheral board is not found, or if 
- * it is found multiple times, return -1. */
-int CoreBoard::FindPeripheralBoard(int id) {
+/* Verify that a peripheral board with the provided id is connected
+ * to the provided slot on the core board.
+ * id: The numerical ID of the peripheral board which is inserted
+ * into the core board.
+ * slot: The slot number that the peripheral board is inserted
+ * into the core board (from 0 to 7).
+ * returns: True if the peripheral board is found in that slot, or
+ * false if the peripheral board is not found in that slot. */
+bool CoreBoard::FindPeripheralBoard(int id, int slot) {
 	int noise_tolerance = 40;
-	bool found_board = false;
-	int slot_with_correct_board = -1;
 	int adc_inputs[8] = {analogRead(PIN_BOARD_ID_0), analogRead(PIN_BOARD_ID_1),
 						           analogRead(PIN_BOARD_ID_2), analogRead(PIN_BOARD_ID_3),
 						           analogRead(PIN_BOARD_ID_4), analogRead(PIN_BOARD_ID_5),
 						           analogRead(PIN_BOARD_ID_6), analogRead(PIN_BOARD_ID_7)};
-	for (int slot = 0; slot < 7; slot++) {
-		int adc_value = adc_inputs[slot];
-		if (abs(id - adc_value) < noise_tolerance) {
-			if (found_board) {
-				return -1;
-			} else {
-				found_board = true;
-				slot_with_correct_board = slot;
-			}
-		}
-	}
-	if (found_board) {
-		return slot_with_correct_board;
-	} else {
-		return -1;
-	}
+	int adc_value = adc_inputs[slot];
+	return (abs(id - adc_value) < noise_tolerance);
 }
 
 /* Blinks a specific LED repeatedly using the IO Expander. 
@@ -109,6 +94,7 @@ void CoreBoard::BlinkLED(char led_name, int num_blinks) {
  * If multiple buttons are being pressed, or if no buttons are being pressed,
  * then it returns 'X'. */
 char CoreBoard::GetButtonPress() {
+  // TODO: Update this to use interrupts
   if (digitalRead(PIN_IO_EXPANDER_INTERRUPT) == LOW) {
     uint8_t button_values = (uint8_t) (IO_expander->read16() & 0x00FF);
     switch (button_values) {

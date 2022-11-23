@@ -41,13 +41,13 @@
 
 #define PIN_IO_EXPANDER_INTERRUPT 4
 
-#define BOARD_ID_IGNITER      430
-#define BOARD_ID_SOLENOID     1018
-#define BOARD_ID_SERVO        1139
-#define BOARD_ID_THERMOCOUPLE 1615
-#define BOARD_ID_RTD          2199
-#define BOARD_ID_PT_A         2812
-#define BOARD_ID_PT_B         3726
+#define BOARD_ID_IGNITER      493
+#define BOARD_ID_SOLENOID     1127
+#define BOARD_ID_SERVO        1253
+#define BOARD_ID_THERMOCOUPLE 1761
+#define BOARD_ID_RTD          2385
+#define BOARD_ID_PT_A         3024
+#define BOARD_ID_PT_B         3806
 
 #define I2C_MUX_ADDRESS 0x70
 #define IO_EXPANDER_ADDRESS 0x20
@@ -61,7 +61,7 @@ public:
   SPIClass *SPI_core;
   SPIClass *SPI_peripheral;
 	CoreBoard();
-	int FindPeripheralBoard(int id);
+	bool FindPeripheralBoard(int id, int slot);
   void BlinkLED(char led_name, int num_blinks);
   char GetButtonPress();
   void SetBroadcast(bool value);
