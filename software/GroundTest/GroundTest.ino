@@ -1,4 +1,5 @@
-#include "GroundTest.h"
+// #include "GroundTest.h"
+#include "IgniterBoard.h"
 
 /* BOARD CONFIGURATION (edit this section to change it) */
 /* ---------------------------------------------------- */
@@ -14,6 +15,8 @@ TwoWire *I2C_fast;
 TwoWire *I2C_slow;
 PCF8575 *IO_expander;
 TCA9548A *I2C_mux;
+
+IgniterBoard *igniter_board;
 
 bool button_press_detected = false;
 
@@ -149,6 +152,8 @@ void setup() {
 
   Serial.println("Succesfully initialized core board.");
 
+  igniter_board = new IgniterBoard(SLOT_IGNITER, I2C_slow, I2C_mux);
+
 }
 
 void loop() {
@@ -178,6 +183,9 @@ void loop() {
     IO_expander->write16(0xFF00);
   }
 
-  // ...
+  igniter_board->OpenRelay(0);
+  delay(5000);
+  igniter_board->CloseRelay(0);
+  delay(5000);
   
 }
