@@ -3,6 +3,7 @@
 #endif
 #include "IgniterBoard.h"
 #include "RTDBoard.h"
+#include "PTBoard.h"
 
 /* BOARD CONFIGURATION (edit this section to change it) */
 /* ---------------------------------------------------- */
@@ -21,6 +22,7 @@ TCA9548A *I2C_mux;
 
 IgniterBoard *igniter_board;
 RTDBoard *rtd_board;
+PTBoard *pt_board_a;
 
 bool button_press_detected = false;
 
@@ -158,6 +160,7 @@ void setup() {
 
   igniter_board = new IgniterBoard(SLOT_IGNITER, I2C_slow, I2C_mux);
   rtd_board = new RTDBoard(SLOT_RTD, I2C_slow, I2C_mux);
+  pt_board_a = new PTBoard(SLOT_PT_A, I2C_slow, I2C_mux);
 
 }
 
@@ -198,5 +201,9 @@ void loop() {
   /* Test RTD Board */
   for (int i=0; i<8; i++) { rtd_board->PrintData(i); }
   for (int i=0; i<8; i++) { rtd_board->PrintErrorStatus(i); }
+
+  /* Test PT Board */
+  for (int i=0; i<6; i++) { pt_board_a->PrintDataPT(i, 128); }
+  for (int i=0; i<2; i++) { pt_board_a->PrintDataLC(i, 128); }
   
 }
