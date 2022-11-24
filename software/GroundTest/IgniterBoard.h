@@ -1,4 +1,6 @@
-#include "GroundTest.h"
+#ifndef GROUND_TEST_HEADER_FILE_INCLUDED
+  #include "GroundTest.h"
+#endif
 
 // Maybe edit this
 #define IGNITER_BOARD_IO_EXPANDER_ADDRESS 0x21

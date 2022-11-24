@@ -1,5 +1,8 @@
-// #include "GroundTest.h"
+#ifndef GROUND_TEST_HEADER_FILE_INCLUDED
+  #include "GroundTest.h"
+#endif
 #include "IgniterBoard.h"
+#include "RTDBoard.h"
 
 /* BOARD CONFIGURATION (edit this section to change it) */
 /* ---------------------------------------------------- */
@@ -17,6 +20,7 @@ PCF8575 *IO_expander;
 TCA9548A *I2C_mux;
 
 IgniterBoard *igniter_board;
+RTDBoard *rtd_board;
 
 bool button_press_detected = false;
 
@@ -153,11 +157,13 @@ void setup() {
   Serial.println("Succesfully initialized core board.");
 
   igniter_board = new IgniterBoard(SLOT_IGNITER, I2C_slow, I2C_mux);
+  rtd_board = new RTDBoard(SLOT_RTD, I2C_slow, I2C_mux);
 
 }
 
 void loop() {
 
+  /* Respond to button press on core board. */
   if (button_press_detected) {
     Serial.println("button press detected.");
     uint16_t all_pins = IO_expander->read16();
@@ -183,9 +189,14 @@ void loop() {
     IO_expander->write16(0xFF00);
   }
 
+  /* Test igniter board */
   igniter_board->OpenRelay(0);
   delay(5000);
   igniter_board->CloseRelay(0);
   delay(5000);
+
+  /* Test RTD Board */
+  for (int i=0; i<8; i++) { rtd_board->PrintData(i); }
+  for (int i=0; i<8; i++) { rtd_board->PrintErrorStatus(i); }
   
 }

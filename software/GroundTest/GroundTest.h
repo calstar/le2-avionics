@@ -10,23 +10,26 @@
 /* Library: https://www.arduino.cc/reference/en/libraries/pcf8575/ */
 #include <PCF8575.h>
 
+/* Value that can be checked in other files so that this file isn't included twice. */
+#define GROUND_TEST_HEADER_FILE_INCLUDED true
+
 #define PIN_I2C_SLOW_SDA 21
 #define PIN_I2C_SLOW_SCL 22
 
 #define PIN_I2C_FAST_SDA 16
 #define PIN_I2C_FAST_SCL 17
 
-#define SPI_MISO 12
-#define SPI_MOSI 13
-#define SPI_SCK 14
-#define SPI_CS_0 15
-#define SPI_CS_1 26
-#define SPI_CS_2 27
+#define PIN_SPI_MISO 12
+#define PIN_SPI_MOSI 13
+#define PIN_SPI_SCK 14
+#define PIN_SPI_CS_0 15
+#define PIN_SPI_CS_1 26
+#define PIN_SPI_CS_2 27
 
-#define SPI_MISO_CORE 19
-#define SPI_MOSI_CORE 23
-#define SPI_SCK_CORE 18
-#define SPI_CS_CORE 5
+#define PIN_SPI_MISO_CORE 19
+#define PIN_SPI_MOSI_CORE 23
+#define PIN_SPI_SCK_CORE 18
+#define PIN_SPI_CS_CORE 5
 
 #define PIN_BOARD_ID_0 36
 #define PIN_BOARD_ID_1 39
