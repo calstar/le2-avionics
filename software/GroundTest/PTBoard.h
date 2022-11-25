@@ -5,11 +5,12 @@
 // Maybe edit this
 #define PT_BOARD_IO_EXPANDER_ADDRESS 0x23
 
+/* The pin numbers (0 to 15) on the PCF8575 IO Expander
+ * that connect to each PT or LC amplifier. */
 #define LC_0_CLK_PIN  15
 #define LC_0_DATA_PIN 14
 #define LC_1_CLK_PIN  0
 #define LC_1_DATA_PIN 1
-
 #define PT_0_CLK_PIN  9
 #define PT_0_DATA_PIN 8
 #define PT_1_CLK_PIN  11

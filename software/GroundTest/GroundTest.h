@@ -53,5 +53,5 @@
 #define BOARD_ID_PT_B         3806
 
 #define I2C_MUX_ADDRESS 0x70
-#define IO_EXPANDER_ADDRESS 0x20
+#define CORE_IO_EXPANDER_ADDRESS 0x20
 

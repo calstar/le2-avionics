@@ -147,8 +147,9 @@ long PTBoard::ReadFromAmplifier(int io_expander_data_pin, int io_expander_clk_pi
 }
 
 /* Helper function for the ReadFromAmplifier() function. Toggle the
- * clock high and low 8 times while reading in bits from the Amplifier.
- * The bits here are always shifted in MSB First.
+ * clock high and low 8 times while reading in one bit at a time from
+ * the Amplifier.The bits are shifted in MSB First. Most of this was
+ * copied from the library here: https://github.com/bogde/HX711
  * io_expander_data_pin: The pin number (0 to 15) on the PT Board's
  * PCF8575 IO Expander that should be used for the data line.
  * io_expander_clk_pin: The pin number (0 to 15) on the PT Board's
