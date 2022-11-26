@@ -2,7 +2,6 @@
   #include "GroundTest.h"
 #endif
 
-// Maybe edit this
 #define IGNITER_BOARD_IO_EXPANDER_ADDRESS 0x21
 
 class IgniterBoard {
@@ -10,9 +9,8 @@ class IgniterBoard {
     int slot;
     TwoWire *I2C_slow;
     PCF8575 *IO_expander;
-    TCA9548A *I2C_mux;
   public:
-    IgniterBoard(int slot_argument, TwoWire *I2C_slow_argument, TCA9548A *I2C_mux_argument);
+    IgniterBoard(int slot_argument, TwoWire *I2C_slow_argument);
     void OpenRelay(int relay);
     void CloseRelay(int relay);
 };

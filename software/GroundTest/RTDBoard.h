@@ -5,8 +5,9 @@
 /* Library: https://learn.adafruit.com/adafruit-max31865-rtd-pt100-amplifier/arduino-code */
 #include <Adafruit_MAX31865.h>
 
-// Maybe edit this
 #define RTD_BOARD_IO_EXPANDER_ADDRESS 0x22
+
+#define NUM_RTD_AMPLIFIERS 8
 
 /* The value of the Rref resistor. Use 430.0 for PT100 and 4300.0 for PT1000 */
 #define RREF 430.0
@@ -18,10 +19,8 @@ class RTDBoard {
     int slot;
     TwoWire *I2C_slow;
     PCF8575 *IO_expander;
-    TCA9548A *I2C_mux;
-    Adafruit_MAX31865 *RTD_amplifier;
+    Adafruit_MAX31865 *RTD_amplifiers[NUM_RTD_AMPLIFIERS];
   public:
-    RTDBoard(int slot_argument, TwoWire *I2C_slow_argument, TCA9548A *I2C_mux_argument);
+    RTDBoard(int slot_argument, TwoWire *I2C_slow_argument);
     void PrintData(int rtd_number);
-    void PrintErrorStatus(int rtd_number);
 };

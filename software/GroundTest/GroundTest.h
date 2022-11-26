@@ -49,8 +49,7 @@
 #define BOARD_ID_SERVO        1253
 #define BOARD_ID_THERMOCOUPLE 1761
 #define BOARD_ID_RTD          2385
-#define BOARD_ID_PT_A         3024
-#define BOARD_ID_PT_B         3806
+#define BOARD_ID_PT           3024
 
 #define I2C_MUX_ADDRESS 0x70
 #define CORE_IO_EXPANDER_ADDRESS 0x20

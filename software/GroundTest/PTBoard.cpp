@@ -1,21 +1,16 @@
 #include "PTBoard.h"
 
 /* Cosntructor for the PTBoard class. */
-PTBoard::PTBoard(int slot_argument, TwoWire *I2C_slow_argument, TCA9548A *I2C_mux_argument) {
+PTBoard::PTBoard(int slot_argument, TwoWire *I2C_slow_argument) {
 
   slot = slot_argument;
   I2C_slow = I2C_slow_argument;
-  I2C_mux = I2C_mux_argument;
 
-  I2C_mux->openChannel(slot);
-
-  // Initial value has all CLK pins set to low and all DATA pins set to high.
+  // Initial value has all CLK pins set to 0 and all DATA pins set to 1.
   // In binary: (15) 0101010110101010 (0)
   uint16_t io_expander_initial_value = 0x55AA;
   IO_expander = new PCF8575(PT_BOARD_IO_EXPANDER_ADDRESS, I2C_slow);
   IO_expander->begin(PIN_I2C_SLOW_SDA, PIN_I2C_SLOW_SCL, io_expander_initial_value);
-
-  I2C_mux->closeChannel(slot);
 
 }
 
@@ -37,17 +32,17 @@ void PTBoard::PrintDataPT(int pt_number, uint8_t gain) {
     case 5 : io_expander_data_pin = PT_5_DATA_PIN; io_expander_clk_pin = PT_5_CLK_PIN; break;
   }
 
-  I2C_mux->openChannel(slot);
-
   long pt_output = ReadFromAmplifier(io_expander_data_pin, io_expander_clk_pin, gain);
 
-  I2C_mux->closeChannel(slot);
-
-  if (!pt_output) { return; }
   Serial.print("Output from Pressure Transducer ");
   Serial.print(pt_number);
   Serial.print(": ");
-  Serial.println(pt_output);
+  if (pt_output) {
+    Serial.println(pt_output);
+  } else {
+    Serial.println("no output");
+  }
+  
 
 }
 
@@ -64,17 +59,16 @@ void PTBoard::PrintDataLC(int lc_number, uint8_t gain) {
     case 1 : io_expander_data_pin = LC_1_DATA_PIN; io_expander_clk_pin = LC_1_CLK_PIN; break;
   }
 
-  I2C_mux->openChannel(slot);
-
   long lc_output = ReadFromAmplifier(io_expander_data_pin, io_expander_clk_pin, gain);
 
-  I2C_mux->closeChannel(slot);
-
-  if (!lc_output) { return; }
   Serial.print("Output from Load Cell ");
   Serial.print(lc_number);
   Serial.print(": ");
-  Serial.println(lc_output);
+  if (lc_output) {
+    Serial.println(lc_output);
+  } else {
+    Serial.println("no output");
+  }
 
 }
 

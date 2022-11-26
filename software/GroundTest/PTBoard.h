@@ -2,11 +2,9 @@
   #include "GroundTest.h"
 #endif
 
-// Maybe edit this
 #define PT_BOARD_IO_EXPANDER_ADDRESS 0x23
 
-/* The pin numbers (0 to 15) on the PCF8575 IO Expander
- * that connect to each PT or LC amplifier. */
+// The pin numbers (0 to 15) on the IO Expander that connect to each PT or LC amplifier.
 #define LC_0_CLK_PIN  15
 #define LC_0_DATA_PIN 14
 #define LC_1_CLK_PIN  0
@@ -29,9 +27,8 @@ class PTBoard {
     int slot;
     TwoWire *I2C_slow;
     PCF8575 *IO_expander;
-    TCA9548A *I2C_mux;
   public:
-    PTBoard(int slot_argument, TwoWire *I2C_slow_argument, TCA9548A *I2C_mux_argument);
+    PTBoard(int slot_argument, TwoWire *I2C_slow_argument);
     void PrintDataPT(int pt_number, uint8_t gain);
     void PrintDataLC(int lc_number, uint8_t gain);
     long ReadFromAmplifier(int io_expander_data_pin, int io_expander_clk_pin, uint8_t gain);
