@@ -303,8 +303,11 @@ void loop() {
     
   }
 
+  /*
   igniter_board->OpenRelay(0);
+  delay(100);
   igniter_board->CloseRelay(0);
+  delay(100);
 
   rtd_board->PrintData(0);
 
@@ -319,6 +322,7 @@ void loop() {
   I2C_mux->openChannel(SLOT_PT_B);
   pt_board_b->PrintDataLC(0, 128);
   pt_board_b->PrintDataPT(0, 128);
+  */
   
 }
 
