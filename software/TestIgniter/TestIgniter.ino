@@ -11,7 +11,7 @@
 #define PIN_I2C_SLOW_SCL 22
 
 #define I2C_MUX_ADDRESS 0x70
-#define IGNITER_BOARD_IO_EXPANDER_ADDRESS 0x21
+#define IGNITER_BOARD_IO_EXPANDER_ADDRESS 0x20
 
 #define SLOT_IGNITER 0
 #define NUM_RELAYS 6
@@ -104,11 +104,9 @@ void setup() {
 
 void loop() {
   
-  for (int i=0; i<6; i++) {
-    igniter_board->OpenRelay(i);
-    delay(5000);
-    igniter_board->CloseRelay(i);
-    delay(5000);
-  }
+  igniter_board->OpenRelay(0);
+  delay(5000);
+  igniter_board->CloseRelay(0);
+  delay(5000);
 
 }
