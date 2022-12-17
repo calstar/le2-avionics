@@ -9,7 +9,7 @@
 #define PIN_I2C_SLOW_SCL 22
 
 #define I2C_MUX_ADDRESS 0x70
-#define PT_BOARD_IO_EXPANDER_ADDRESS 0x23
+#define PT_BOARD_IO_EXPANDER_ADDRESS 0x20
 
 // The pin numbers (0 to 15) on the IO Expander that connect to each PT or LC amplifier.
 #define LC_0_CLK_PIN  15
@@ -137,11 +137,12 @@ long PTBoard::ReadFromAmplifier(int io_expander_data_pin, int io_expander_clk_pi
   /* Wait for the chip to become ready until timeout. The chip will set the 
    * data pin to LOW when it is ready. https://github.com/bogde/HX711/pull/96 */
 	unsigned long millisStarted = millis();
-  unsigned long timeout = 100;
+  unsigned long timeout = 1000;
   bool hx711_ready = false;
 	while (millis() - millisStarted < timeout) {
 		if (IO_expander->read(io_expander_data_pin) == LOW) {
 			hx711_ready = true;
+      break;
 		}
 		delay(1);
 	}
@@ -238,8 +239,12 @@ void setup() {
 }
 
 void loop() {
-  
+
+  pt_board->PrintDataPT(0, 128);
+
+  /*
   for (int i=0; i<2; i++) { pt_board->PrintDataLC(i, 128); }
   for (int i=0; i<6; i++) { pt_board->PrintDataPT(i, 128); }
+  */
 
 }
